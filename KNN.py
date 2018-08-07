@@ -9,6 +9,7 @@ import numpy
 import operator
 import pandas
 import matplotlib
+
 """
 构建一组训练数据（训练样本）
 """
@@ -63,10 +64,11 @@ readcsv()
 
 
 
-'''
+
+def normalize(dataset):    
+  '''
 数据归一化
 '''
-def normalize(dataset):    
     return (dataset-dataset.min(0))/(dataset.max(0)-dataset.min(0))
 
 #data,labels=read_data('testdata.txt')
