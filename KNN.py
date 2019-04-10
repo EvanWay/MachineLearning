@@ -10,10 +10,9 @@ import operator
 import pandas
 import matplotlib
 
-"""
-构建一组训练数据（训练样本）
-"""
+
 def createDataSet():
+    """构建一组训练数据（训练样本）"""
     group=numpy.array([
         [1.0,1.1],
         [1.0,1.0],
@@ -24,22 +23,23 @@ def createDataSet():
     return group,labels
 
 def readcsv():
-    file = pandas.read_csv('E:\wc2018players.csv')
-    man = file.loc[:,['Height','Weight']].values
+    file = pandas.read_csv('F:\pythonworkspace\MachineLearning\wc2018players.csv')
+    man = file[['Pos.','Height','Weight']]
+    #man = file.loc[:,['Height','Weight']].values
     pos = file['Pos.']
     posarr = numpy.array(pos).tolist()
-    
     return man, pos
   
-"""
-方法只能针对实数，使用欧式距离来计算
-Args:
-    inX：输入的新数据，表示为一个向量
-    dataSet: 是样本集。表示为向量数组
-    labels：相应样本集的标签。
-    k：即所选的前K个（小于等于20）
-"""
+
 def classify0(inX, dataSet, lables, k):
+    """
+    方法只能针对实数，使用欧式距离来计算
+    Args:
+        inX：输入的新数据，表示为一个向量
+        dataSet: 是样本集。表示为向量数组
+        labels：相应样本集的标签。
+        k：即所选的前K个（小于等于20）
+    """
     dataSetSize = dataSet.shape[0]                          # shape[0]返回矩阵的行数
     diffMat = numpy.tile(inX, (dataSetSize, 1)) - dataSet   # tile之后inX=[ [0.1,0.1],[0.1,0.1],[0.1,0.1],[0.1,0.1] ],(x-x1),(y-y1)作差得到diffMat 
     sqDiffMat = diffMat**2                                  # 平方,即(x-x1)^2,(y-y1)^2
@@ -66,9 +66,9 @@ readcsv()
 
 
 def normalize(dataset):    
-  '''
-数据归一化
-'''
+    '''
+    数据归一化
+    '''
     return (dataset-dataset.min(0))/(dataset.max(0)-dataset.min(0))
 
 #data,labels=read_data('testdata.txt')
